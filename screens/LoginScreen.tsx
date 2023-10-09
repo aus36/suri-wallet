@@ -15,12 +15,13 @@ const Login = () => {
   React.useLayoutEffect(() => { // disable header
     navigation.setOptions({
       headerShown: false,
+      gestureEnabled: false,
     });
   }, [navigation]);
 
   useMemo(() => {
     if (!pin || pin.length === 0){
-      setDisplayPin('');
+      setDisplayPin('_');
     }
     else {
       const lastChar = pin.charAt(pin.length - 1);
@@ -38,6 +39,7 @@ const Login = () => {
     login(pin);
     
     if (pin === '1234') {
+      setPin(''); // clear pin if successful login
       // @ts-ignore
       navigation.navigate('Home');
     }
@@ -93,7 +95,7 @@ const Login = () => {
       {/* Buttons */}
       <View style={styles.pinRow}>
         <TouchableOpacity // @ts-ignore 
-          onPress={() => handleLogin()}
+          onPress={() => {handleLogin();}}
           style = {styles.loginButton}>
           <Text style = {styles.actionButtonText}>Login</Text>
         </TouchableOpacity>
@@ -135,15 +137,21 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     backgroundColor:'grey',
-    padding: 10,
+    width : 90,
+    height: 40,
     margin: 20,
     borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   backButton: {
     backgroundColor: "red",
-    padding: 10,
+    width : 90,
+    height: 40,
     margin: 20,
     borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   actionButtonText: {
     color: 'white',
@@ -152,8 +160,8 @@ const styles = StyleSheet.create({
   pinButton: {
     borderColor: 'white',
     borderWidth: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 25,
     margin: 20,
     borderRadius: 30,
   },

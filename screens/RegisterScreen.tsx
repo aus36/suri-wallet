@@ -14,7 +14,7 @@ const Register = () => {
 
     return (
         <View style = {styles.container}>
-            <Text>Register Screen</Text>
+            <Text style = {styles.text}>Register Screen</Text>
         </View>
     );
 }
@@ -24,8 +24,11 @@ export default Register;
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: 'black',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    text: {
+        color: 'white',
     }
   });
