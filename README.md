@@ -6,7 +6,7 @@ The wallet application for Suri: a decentralized contacts application. This mobi
 * install Expo Go on your mobile device from the Apple or Android app store
 * clone the repository to your system
 * in your console, navigate to the directory you stored the files
-* install Expo with ```npm install -g expo```
+* install Expo with ```npm install -g expo-cli```
 * run ```npm install```
 * run ```npx expo start``` and scan the QR code that appears in the console
 
