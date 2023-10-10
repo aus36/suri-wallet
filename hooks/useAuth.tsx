@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react'
 
 export const AuthContext = createContext({
-    user: {},
+    user: new Object(),
     login: (pin:string) => {},
     logout: () => {},
     register: () => {},
@@ -11,10 +11,9 @@ export const AuthContext = createContext({
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState<object>({})
 
-    function login(pin: string) {
+    function login(pin: string) { // TODO: fix setUser details here
         if(pin === '1234') {
             setUser({
-                pin: pin,
                 displayName: 'John Doe',
             })
         }
