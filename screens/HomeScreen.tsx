@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import useAuth from '../hooks/useAuth';
@@ -10,8 +10,7 @@ const Home = () => {
     const navigation = useNavigation(); // enable navigation
     const { user, logout } = useAuth(); // enable auth functionality
 
-
-    React.useLayoutEffect(() => { // disable header
+    useLayoutEffect(() => { // disable header
         navigation.setOptions({
             headerShown: false,
             gestureEnabled: false,
@@ -26,8 +25,11 @@ const Home = () => {
 
     return (
         <View style = {styles.container}>
+            {/*Profile Logo*/}
             <AntDesign name="user" size={36} color="white" style = {styles.profileLogo}/>
+            {/*Header*/}
             <Text style = {styles.headerText}>Profile Screen</Text>
+            {/*Buttons*/}
             <View style = {styles.row}>
                 <TouchableOpacity style = {styles.actionButton}>
                     <Text style = {styles.bodyText}>View SCVP</Text>
