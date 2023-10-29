@@ -41,7 +41,7 @@ const Login = () => {
     if (pin === '1234') {
       setPin(''); // clear pin if successful login
       // @ts-ignore
-      navigation.navigate('Home');
+      navigation.navigate('Tabs');
     }
     else {
       alert("Incorrect PIN");
