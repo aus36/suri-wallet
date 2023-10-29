@@ -5,15 +5,20 @@ import Login from '../screens/LoginScreen';
 import Home from '../screens/HomeScreen';
 import Register from '../screens/registration/RegisterScreen';
 import RegistrationResultScreen from '../screens/registration/RegistrationResultScreen';
+import Settings from '../screens/SettingsScreen';
+import Credentials from '../screens/CredentialsScreen';
+import * as Haptics from 'expo-haptics';
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+const Tabs = createBottomTabNavigator();
 
 function TabNavigator() { //Contains all pages that have bottom tab navigator
     return (
-        <Tab.Navigator screenOptions={{tabBarStyle: {backgroundColor: "black"}}}>
-            <Tab.Screen name="Home" component={Home} />
-        </Tab.Navigator>
+        <Tabs.Navigator screenOptions={{tabBarStyle: {backgroundColor: "black"}}}>
+            <Tabs.Screen name="Home" component={Home} listeners={{tabPress: () => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)}}/>
+            <Tabs.Screen name="Credentials" component={Credentials} listeners={{tabPress: () => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)}}/>
+            <Tabs.Screen name="Settings" component={Settings} listeners={{tabPress: () => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)}}/>
+        </Tabs.Navigator>
     );
 }
 

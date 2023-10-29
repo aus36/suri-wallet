@@ -1,11 +1,11 @@
 import { Text, View, StyleSheet } from 'react-native';
 
-const Settings = () => {
+const Credentials = () => {
     return (
         <View>
-            <Text>Settings Screen</Text>
+            <Text>Credentials Screen</Text>
         </View>
     );
 };
 
-export default Settings;
+export default Credentials;
