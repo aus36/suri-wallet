@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/core';
 import useAuth from '../hooks/useAuth';
@@ -51,7 +51,7 @@ const Login = () => {
   return (
     <View style={styles.container}>
       {/* Logo */}
-      <Text style = {styles.logo}>SURI Wallet</Text>
+      <Image source={require('../assets/SURI-logo.png')} style={styles.logo}/>
       {/* Pin display */}
       <View style={styles.pinDisplay}>
         <Text style = {styles.displayPin}>{displayPin}</Text>
@@ -124,10 +124,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    fontWeight: 'bold',
-    fontSize: 50,
-    color: 'white',
-    marginBottom: 40,
+    height: 200,
+    width: 350,
   },
   pinPad: {
     marginBottom: 40,
