@@ -53,7 +53,7 @@ const Login = () => {
       {/* Logo */}
       <Image source={require('../assets/SURI-logo.png')} style={styles.logo}/>
       {/* Pin display */}
-      <View style={styles.pinDisplay}>
+      <View>
         <Text style = {styles.displayPin}>{displayPin}</Text>
       </View>
       {/* Pinpad */}
@@ -128,10 +128,7 @@ const styles = StyleSheet.create({
     width: 350,
   },
   pinPad: {
-    marginBottom: 40,
-  },
-  pinDisplay: {
-    
+    marginBottom: 0,
   },
   loginButton: {
     backgroundColor:'grey',
@@ -156,12 +153,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   pinButton: {
+    height: 80,
+    width: 80,
     borderColor: 'white',
     borderWidth: 1,
-    paddingVertical: 15,
-    paddingHorizontal: 25,
     margin: 20,
     borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   pinButtonText: {
     color: 'white',
