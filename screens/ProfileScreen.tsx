@@ -5,7 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import useAuth from '../hooks/useAuth';
 
-const Home = () => {
+const Profile = () => {
 
     const navigation = useNavigation(); // enable navigation
     const { user, logout } = useAuth(); // enable auth functionality
@@ -58,7 +58,7 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default Profile;
 
 const styles = StyleSheet.create({
     container: {
