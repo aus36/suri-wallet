@@ -17,30 +17,17 @@ const Profile = () => {
         });
     }, [navigation]);
 
-    function handleLogout() {
-        logout();
-        // @ts-ignore
-        navigation.navigate('Login');
-    }
-
     return (
         <View style = {styles.container}>
             {/*Profile Logo*/}
             <AntDesign name="user" size={36} color="white" style = {styles.profileLogo}/>
             {/*Header*/}
-            <Text style = {styles.headerText}>Profile Screen</Text>
+            {/* @ts-ignore */}
+            <Text style = {styles.headerText}>{user.displayName}</Text>
             {/*Buttons*/}
             <View style = {styles.row}>
                 <TouchableOpacity style = {styles.actionButton}>
                     <Text style = {styles.bodyText}>View SCVP</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style = {styles.actionButton}>
-                    <Text style = {styles.bodyText}>Verify Social</Text>
-                </TouchableOpacity>
-            </View>
-            <View style = {styles.row}>
-                <TouchableOpacity style = {styles.actionButton}>
-                    <Text style = {styles.bodyText}>Delete Social</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style = {styles.actionButton}>
                     <Text style = {styles.bodyText}>Update Info</Text>
@@ -50,8 +37,8 @@ const Profile = () => {
                 <TouchableOpacity style = {styles.actionButton}>
                     <Text style = {styles.bodyText}>Change Picture</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style = {styles.logoutButton} onPress={handleLogout}>
-                    <Text style = {styles.bodyText}>Logout</Text>
+                <TouchableOpacity style = {styles.actionButton}>
+                    <Text style = {styles.bodyText}>Lmao</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -68,13 +55,11 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     profileLogo: {
-        position: 'absolute',
-        top: 50,
-        right: 15,
         borderWidth: 1,
         borderRadius: 35,
         borderColor: 'white',
         padding: 15,
+        marginBottom: 30,
     },
     bodyText: {
         color: 'white',
@@ -95,20 +80,6 @@ const styles = StyleSheet.create({
         borderColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    logoutButton: {
-        width: 160,
-        height: 60,
-        margin: 15,
-        borderRadius: 40,
-        borderWidth: 1,
-        borderColor: 'red',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    logoutButtonText: {
-        color: 'red',
-        fontSize: 20,
     },
     row: {
         flexDirection: 'row',
