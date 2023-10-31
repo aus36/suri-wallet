@@ -1,7 +1,8 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, Touchable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import useAuth from '../../hooks/useAuth';
 import { useLayoutEffect } from 'react';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Credentials = () => {
 
@@ -16,9 +17,20 @@ const Credentials = () => {
         });
     }, [navigation]);
 
+    function handleAddCredential() {
+        // @ts-ignore
+        navigation.navigate('NewCredential');
+    }
+
     return (
         <View style = {styles.container}>
             <Text style = {styles.headerText}>Credentials Screen</Text>
+            {/* <ScrollView style = {styles.scrollContainer}>
+            </ScrollView> */}
+            <TouchableOpacity style = {styles.addButton} onPress={handleAddCredential}>
+                <Text style = {styles.plus}>+   </Text>
+                <Text style = {styles.bodyText}>Add Credential</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -32,13 +44,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    scrollContainer: {
+        flexDirection: 'column',
+    },
     headerText: {
         fontSize: 24,
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center',
-        marginTop: 20,
-        marginBottom: 20,
     },
     bodyText: {
         fontSize: 18,
@@ -46,33 +59,20 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
     },
-    actionButton: {
-        backgroundColor: '#1E1E1E',
-        borderRadius: 10,
-        padding: 10,
-        margin: 10,
-        width: 150,
-        height: 150,
-        justifyContent: 'center',
-        alignItems: 'center',
+    plus: {
+        fontSize: 24,
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
-    logoutButton: {
-        backgroundColor: '#1E1E1E',
-        borderRadius: 10,
-        padding: 10,
-        margin: 10,
-        width: 150,
-        height: 150,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    row: {
+    addButton: {
         flexDirection: 'row',
+        width: 200,
+        height: 60,
+        borderRadius: 40,
+        borderWidth: 1,
+        borderColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    profileLogo: {
-        marginTop: 20,
-        marginBottom: 20,
     },
 });
