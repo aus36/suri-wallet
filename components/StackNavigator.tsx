@@ -10,6 +10,7 @@ import CredentialModification from '../screens/credentials/CredentialModificatio
 import * as Haptics from 'expo-haptics';
 import Profile from '../screens/ProfileScreen';
 import NewCredential from '../screens/credentials/NewCredentialScreen';
+import Users from '../screens/UsersScreen';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
@@ -54,12 +55,13 @@ function TabNavigator() { //Contains all pages that have bottom tab navigator
 export default function StackNavigator() {
   return (
     <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName='Users'>
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
             <Stack.Screen name="RegisterResults" component={RegistrationResultScreen} initialParams={{didDoc: {}, SCVP: {}}}/>
             <Stack.Screen name="CredentialModification" component={CredentialModification} />
             <Stack.Screen name="NewCredential" component={NewCredential} />
+            <Stack.Screen name="Users" component={Users} />
             <Stack.Screen name="Tabs" component={TabNavigator} options={{headerShown: false}}/>
         </Stack.Navigator>
     </NavigationContainer>

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react'
+import * as SecureStore from 'expo-secure-store';
 
 export const AuthContext = createContext({ //TODO: finalize what operations the context will have
     user: new Object(),

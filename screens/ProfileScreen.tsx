@@ -38,7 +38,7 @@ const Profile = () => {
                     <Text style = {styles.bodyText}>Change Picture</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style = {styles.actionButton}>
-                    <Text style = {styles.bodyText}>Lmao</Text>
+                    <Text style = {styles.bodyText}>Change Name</Text>
                 </TouchableOpacity>
             </View>
         </View>

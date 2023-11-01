@@ -50,6 +50,11 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
+      {/* Back Button */}
+      {/* @ts-ignore */}
+      <TouchableOpacity style = {styles.backButton} onPress = {() => navigation.navigate("Users")}>
+        <Text style = {styles.actionButtonText}>Back</Text>
+      </TouchableOpacity>
       {/* Logo */}
       <Image source={require('../assets/SURI-logo.png')} style={styles.logo}/>
       <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#111111"]} style = {styles.gradientContainer}>
@@ -102,7 +107,7 @@ const Login = () => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setPin(pin.slice(0, -1))}
-            style = {styles.backButton}>
+            style = {styles.deleteButton}>
             <Text style = {styles.actionButtonText}>Delete</Text>
           </TouchableOpacity>
         </View>
@@ -147,7 +152,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  backButton: {
+  deleteButton: {
     backgroundColor: "red",
     width : 90,
     height: 40,
@@ -188,5 +193,17 @@ const styles = StyleSheet.create({
   registerButtonText: {
     color: 'white',
     fontSize: 20,
-  }
+  },
+  backButton: {
+    top: 50,
+    left: 20,
+    position: 'absolute',
+    width: 60,
+    height: 40,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+},
 });
