@@ -32,9 +32,8 @@ export const AuthProvider = ({ children }) => {
     function logout() {
         setCurrentUser("");
     }
-    async function register(displayName:string, did:string, bio:string, pin:string, sigchain:[]) { // TODO: implement register functionality (displayname, DID, bio, pin, sigchain)
+    async function register(displayName:string, did:string, bio:string, pin:string, sigchain:[]) { // TODO: implement register function
         Storage.setItem();
-
     }
 
     return (

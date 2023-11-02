@@ -58,8 +58,7 @@ const Credentials = () => {
                 <FlatList data = {sampleData} numColumns={1} style = {styles.scrollContainer} renderItem={ ({item}) => <CredentialCard  
                 credentialID = {item.id}
                 platform = {item.platform}
-                issuer = {item.issuer}
-                date = {item.date}
+                issueDate = {item.date}
                 expirationDate = {item.expirationDate}
                 />}/>
                 ) : (
@@ -91,8 +90,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 30,
         padding: 15,
-        marginTop: 10,
-      },
+    },
     scrollContainer: {
         height: 650,
         width: 340,
@@ -102,8 +100,6 @@ const styles = StyleSheet.create({
     bodyText: {
         fontSize: 18,
         color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
     },
     addButton: {
         backgroundColor: '#2F2F2F',

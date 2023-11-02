@@ -12,6 +12,7 @@ import * as Haptics from 'expo-haptics';
 import Profile from '../screens/ProfileScreen';
 import NewCredential from '../screens/credentials/NewCredentialScreen';
 import Users from '../screens/UsersScreen';
+import Dev from '../screens/DevScreen';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
@@ -74,6 +75,7 @@ export default function StackNavigator() {
             <Stack.Screen name="CredentialModification" component={CredentialModification} />
             <Stack.Screen name="NewCredential" component={NewCredential} />
             <Stack.Screen name="Users" component={Users} />
+            <Stack.Screen name="Dev" component={Dev} />
             <Stack.Screen name="Tabs" component={TabNavigator} options={{headerShown: false, gestureEnabled:false}} />
         </Stack.Navigator>
     </NavigationContainer>

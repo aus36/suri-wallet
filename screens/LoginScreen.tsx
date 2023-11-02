@@ -44,6 +44,11 @@ const Login = () => {
       // @ts-ignore
       navigation.navigate('Tabs');
     }
+    else if (pin === '9999') { // TODO: remove this once we're done testing
+      setPin('');
+      // @ts-ignore
+      navigation.navigate('Dev');
+    }
     else {
       alert("Incorrect PIN");
     }
