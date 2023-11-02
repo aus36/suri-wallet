@@ -3,6 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/core';
 import useAuth from '../hooks/useAuth';
 import React, { useState, useMemo } from 'react';
+import { AntDesign } from '@expo/vector-icons';
 
 const Login = () => {
 
@@ -29,14 +30,14 @@ const Login = () => {
     }
   },[pin]);
 
-  function handlePress(num: string) {
+  function handlePress(num: string) { // function for pressing pin buttons
     if (pin.length < 4) {
       setPin(pin + num);
     }
   }
 
   function handleLogin() { // TODO: implement proper pin auth
-    login(pin);
+    login(pin, "test");
     
     if (pin === '1234') {
       setPin(''); // clear pin if successful login
@@ -53,7 +54,7 @@ const Login = () => {
       {/* Back Button */}
       {/* @ts-ignore */}
       <TouchableOpacity style = {styles.backButton} onPress = {() => navigation.navigate("Users")}>
-        <Text style = {styles.actionButtonText}>Back</Text>
+        <AntDesign name="back" size={24} color="white" />
       </TouchableOpacity>
       {/* Logo */}
       <Image source={require('../assets/SURI-logo.png')} style={styles.logo}/>
@@ -126,7 +127,7 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: '#141414',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     top: 50,
-    left: 20,
+    left: 10,
     position: 'absolute',
     width: 60,
     height: 40,
