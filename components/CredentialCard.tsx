@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import "../credentials/fucker.json"
 
 // type credentialProps = {
 //   credentials: {
