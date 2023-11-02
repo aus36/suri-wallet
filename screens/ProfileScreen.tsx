@@ -36,7 +36,7 @@ const Profile = () => {
                 </TouchableOpacity>
             </View>
             {/*Sigchain Display*/}
-            <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#111111"]} style = {styles.gradientContainer}>
+            <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#1F1F1F"]} style = {styles.gradientContainer}>
                 <Text style = {styles.bodyText}>Scrollable sigchain will go here</Text>
             </LinearGradient>
         </SafeAreaView>

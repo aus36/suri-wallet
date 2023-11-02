@@ -11,7 +11,7 @@ const Dev = () => {
     useLayoutEffect(() => { // disable header
         navigation.setOptions({
             headerShown: false,
-            gestureEnabled: false,
+            gestureEnabled: true,
         });
     }, [navigation]);
 

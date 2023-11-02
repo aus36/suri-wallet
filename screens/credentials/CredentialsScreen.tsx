@@ -1,7 +1,7 @@
 import { SafeAreaView, Text, View, StyleSheet, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import useAuth from '../../hooks/useAuth';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import CredentialCard from '../../components/CredentialCard';
@@ -11,31 +11,46 @@ const Credentials = () => {
     const navigation = useNavigation(); // enable navigation
     const { currentUser } = useAuth(); // enable auth functionality
 
-    const [data, setData] = useState([]); // TODO: replace with actual data from sigchain
+    const [data, setData] = useState<Array<Object>>([]); // TODO: replace with actual data from sigchain
 
-    const sampleData = [ // sample data, actual data will come from sigchain
+    const testData = [ // sample data, actual data will come from sigchain
         {
-            id: '1',
-            platform: 'Sample Credential 1',
-            issuer: 'Sample Issuer 1',
-            date: '01/01/2021',
-            expirationDate: '01/01/2022',
+            platform: 'Twitter',
+            date: '01/03/2021',
         },
         {
-            id: '2',
-            platform: 'Sample Credential 2',
-            issuer: 'Sample Issuer 2',
-            date: '01/01/2021',
-            expirationDate: '01/01/2022',
+            platform: 'Github',
+            date: '02/01/2021',
         },
         {
-            id: '3',
-            platform: 'Sample Credential 3',
-            issuer: 'Sample Issuer 3',
-            date: '01/01/2021',
-            expirationDate: '01/01/2022',
+            platform: 'Steam',
+            date: '05/05/2021',
+        },
+        {
+            platform: "Facebook",
+            date: "02/03/2022",
+        },
+        {
+            platform: "Instagram",
+            date: "03/05/2022",
+        },
+        {
+            platform: "Reddit",
+            date: "04/06/2022",
+        },
+        {
+            platform: "Twitch",
+            date: "05/07/2022",
+        },
+        {
+            platform: "Discord",
+            date: "06/08/2022",
         },
     ];
+
+    useEffect(() => {
+        setData(testData);
+    },[]);
 
     //disable header/gestures
     useLayoutEffect(() => {
@@ -52,15 +67,10 @@ const Credentials = () => {
 
     return (
         <SafeAreaView style = {styles.container}>
-            <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#111111"]} style = {styles.gradientContainer}>
+            <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#1F1F1F"]} style = {styles.gradientContainer}>
             {/* Conditional Rendering to show list of credentials or text if none found */}
             {(data.length > 0) ? (
-                <FlatList data = {sampleData} numColumns={1} style = {styles.scrollContainer} renderItem={ ({item}) => <CredentialCard  
-                credentialID = {item.id}
-                platform = {item.platform}
-                issueDate = {item.date}
-                expirationDate = {item.expirationDate}
-                />}/>
+                <FlatList data = {testData} numColumns={1} style = {styles.scrollContainer} renderItem={ ({item}) => <CredentialCard credential={item}/>}/>
                 ) : (
                 <Text style = {styles.bodyText}>No Credentials Found</Text>
                 )    
@@ -89,13 +99,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 30,
-        padding: 15,
+        paddingHorizontal: 15,
     },
     scrollContainer: {
-        height: 650,
-        width: 340,
-        borderColor: 'white',
-        borderWidth: 1,
+        marginVertical: 10,
+        height: "100%",
+        width: "100%",
+        // borderColor: 'white',
+        // borderRadius: 20,
+        // borderWidth: 1,
     },
     bodyText: {
         fontSize: 18,

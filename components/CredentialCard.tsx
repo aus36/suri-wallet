@@ -33,13 +33,13 @@ export default CredentialCard;
 const styles = StyleSheet.create({
   container: {
     height: 110,
-    width: 380,
+    width: "100%",
     borderRadius: 20,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#212121',
-    margin: 5,
+    marginVertical: 5,
   },
   headerText: {
     color: 'white',
