@@ -1,35 +1,46 @@
 import { createContext, useContext, useState } from 'react'
-import * as SecureStore from 'expo-secure-store';
+// @ts-ignore
+import * as Storage from "../functions/storage.ts"
 
 export const AuthContext = createContext({ //TODO: finalize what operations the context will have
-    user: new Object(),
+    currentUser: "",
     login: (pin:string, displayName: string) => {},
     logout: () => {},
-    register: () => {},
+    register: (displayName:string, did:string, bio:string, pin:string, sigchain:[]) => {},
 })
 
 // @ts-ignore
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState<object>({})
+    const [currentUser, setCurrentUser] = useState<string>("")
 
-    function login(pin: string, displayName: string) { // TODO: finalize what details the user will have here
+    async function login(pin: string, displayName: string) {
         if(pin === '1234') {
-            setUser({
-                displayName: 'Sample Name',
-            })
+            setCurrentUser("Display Name");
         }
+
+        // TODO: uncomment this code when storage is finished, this should work for login
+
+        // const user = await Storage.getItem(displayName);
+
+        // if(pin === user.pin) {
+        //     return true;
+        // }
+        // else {
+        //     return false
+        // }
     }
     function logout() {
-        setUser({});
+        setCurrentUser("");
     }
-    function register() { // TODO: implement register functionality (displayname, DID, bio, pin, sigchain)
-        setUser({});
+    async function register(displayName:string, did:string, bio:string, pin:string, sigchain:[]) { // TODO: implement register functionality (displayname, DID, bio, pin, sigchain)
+        Storage.setItem();
+
     }
 
     return (
         <AuthContext.Provider
             value={{ 
-                user: user,
+                currentUser: currentUser,
                 login:login,
                 logout:logout,
                 register:register

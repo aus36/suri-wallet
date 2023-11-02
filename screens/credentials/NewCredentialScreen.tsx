@@ -6,7 +6,7 @@ import { useLayoutEffect } from 'react';
 const NewCredential = () => {
 
     const navigation = useNavigation(); // enable navigation
-    const { user } = useAuth(); // enable auth functionality
+    const { currentUser } = useAuth(); // enable auth functionality
 
     //disable header
     useLayoutEffect(() => {

@@ -9,7 +9,7 @@ import CredentialCard from '../../components/CredentialCard';
 const Credentials = () => {
 
     const navigation = useNavigation(); // enable navigation
-    const { user } = useAuth(); // enable auth functionality
+    const { currentUser } = useAuth(); // enable auth functionality
 
     const [data, setData] = useState([]); // TODO: replace with actual data from sigchain
 

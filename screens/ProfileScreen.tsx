@@ -5,11 +5,12 @@ import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import useAuth from '../hooks/useAuth';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as SecureStore from 'expo-secure-store';
 
 const Profile = () => {
 
     const navigation = useNavigation(); // enable navigation
-    const { user, logout } = useAuth(); // enable auth functionality
+    const { currentUser } = useAuth(); // enable auth functionality
 
     useLayoutEffect(() => { // disable header
         navigation.setOptions({
@@ -24,10 +25,10 @@ const Profile = () => {
             <AntDesign name="user" size={36} color="white" style = {styles.profileLogo}/>
             {/*Header*/}
             {/* @ts-ignore */}
-            <Text style = {styles.headerText}>{user.displayName}</Text>
+            <Text style = {styles.headerText}>{currentUser}</Text>
             {/*Buttons*/}
             <View style = {styles.row}>
-                <TouchableOpacity style = {styles.actionButton}>
+                <TouchableOpacity style = {styles.actionButton} onPress={() => {}}>
                     <Text style = {styles.bodyText}>Export Info</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style = {styles.actionButton}>
@@ -52,8 +53,8 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     gradientContainer: {
-        height: 500,
-        width: 350,
+        height: 550,
+        width: 360,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 30,
@@ -78,14 +79,14 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     actionButton: {
+        backgroundColor: '#2F2F2F',
+        marginTop: 10,
         width: 160,
-        height: 60,
-        margin: 15,
         borderRadius: 40,
-        borderWidth: 1,
-        borderColor: 'white',
+        height: 45,
         justifyContent: 'center',
         alignItems: 'center',
+        marginHorizontal: 10,
     },
     row: {
         flexDirection: 'row',

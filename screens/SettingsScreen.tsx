@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import useAuth from '../hooks/useAuth';
 import { useLayoutEffect } from 'react';
@@ -6,7 +6,7 @@ import { useLayoutEffect } from 'react';
 const Settings = () => {
 
     const navigation = useNavigation(); // enable navigation
-    const { user, logout } = useAuth(); // enable auth functionality
+    const { logout } = useAuth(); // enable auth functionality
 
     //disable header/gestures
     useLayoutEffect(() => {
@@ -23,12 +23,12 @@ const Settings = () => {
     }
 
     return (
-        <View style = {styles.container}>
+        <SafeAreaView style = {styles.container}>
             <Text style = {styles.headerText}>Settings Screen</Text>
             <TouchableOpacity style = {styles.logoutButton} onPress={handleLogout}>
                 <Text style = {styles.bodyText}>Logout</Text>
             </TouchableOpacity>
-        </View>
+        </SafeAreaView>
     );
 };
 

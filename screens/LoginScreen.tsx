@@ -8,7 +8,7 @@ import { AntDesign } from '@expo/vector-icons';
 const Login = () => {
 
   const navigation = useNavigation(); // enable navigation
-  const { user, login, register } = useAuth(); // enable user functionality
+  const { currentUser, login } = useAuth(); // enable user functionality
 
   const [pin, setPin] = useState('');
   const [displayPin, setDisplayPin] = useState('');
@@ -113,11 +113,6 @@ const Login = () => {
           </TouchableOpacity>
         </View>
       </LinearGradient>
-      <TouchableOpacity // @ts-ignore 
-        onPress={() => navigation.navigate('Register')}
-        style = {styles.registerButton}>
-        <Text style = {styles.registerButtonText}>Don't have an account? Tap here.</Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -187,13 +182,6 @@ const styles = StyleSheet.create({
   displayPin: {
     color: 'white',
     fontSize: 40,
-  },
-  registerButton: {
-    marginTop: 60,
-  },
-  registerButtonText: {
-    color: 'white',
-    fontSize: 20,
   },
   backButton: {
     top: 50,
