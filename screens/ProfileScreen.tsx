@@ -1,16 +1,19 @@
-import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import useAuth from '../hooks/useAuth';
 import { LinearGradient } from 'expo-linear-gradient';
-import * as SecureStore from 'expo-secure-store';
+//@ts-ignore
+import * as Sigchain from "../functions/did.ts"
 
 const Profile = () => {
 
     const navigation = useNavigation(); // enable navigation
     const { currentUser } = useAuth(); // enable auth functionality
+
+    const [sigchain, setSigchain] = useState<Array<Object>>([]); // TODO: replace with actual data from sigchain
 
     useLayoutEffect(() => { // disable header
         navigation.setOptions({
@@ -23,9 +26,11 @@ const Profile = () => {
         <SafeAreaView style = {styles.container}>
             {/*Profile Logo*/}
             <AntDesign name="user" size={36} color="white" style = {styles.profileLogo}/>
+
             {/*Header*/}
             {/* @ts-ignore */}
             <Text style = {styles.headerText}>{currentUser}</Text>
+
             {/*Buttons*/}
             <View style = {styles.row}>
                 <TouchableOpacity style = {styles.actionButton} onPress={() => {}}>
@@ -35,9 +40,18 @@ const Profile = () => {
                     <Text style = {styles.bodyText}>Update Info</Text>
                 </TouchableOpacity>
             </View>
+
             {/*Sigchain Display*/}
             <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#1F1F1F"]} style = {styles.gradientContainer}>
-                <Text style = {styles.bodyText}>Scrollable sigchain will go here</Text>
+                {sigchain.toString() !== "" ? (
+                    <ScrollView style = {styles.scrollContainer}>
+                        <Text style = {styles.bodyText}>
+                            {sigchain.toString()}
+                        </Text>
+                    </ScrollView>
+                ) : (
+                    <Text style={styles.bodyText}>No sigchain found</Text>
+                )}
             </LinearGradient>
         </SafeAreaView>
     );
@@ -60,7 +74,15 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         padding: 15,
         marginTop: 20,
-      },
+    },
+    scrollContainer: {
+        marginVertical: 10,
+        height: "100%",
+        width: "100%",
+        borderColor: 'white',
+        borderRadius: 20,
+        borderWidth: 1,
+    },
     profileLogo: {
         borderWidth: 1,
         borderRadius: 35,

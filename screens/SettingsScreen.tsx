@@ -66,12 +66,11 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     logoutButton: {
-        width: 160,
-        height: 60,
+        width: 130,
+        height: 50,
         margin: 15,
         borderRadius: 40,
-        borderWidth: 1,
-        borderColor: 'red',
+        backgroundColor: 'red',
         justifyContent: 'center',
         alignItems: 'center',
     },

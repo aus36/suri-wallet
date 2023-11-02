@@ -23,7 +23,7 @@ const Credentials = () => {
             date: '02/01/2021',
         },
         {
-            platform: 'Steam',
+            platform: 'StackOverflow',
             date: '05/05/2021',
         },
         {
@@ -39,7 +39,7 @@ const Credentials = () => {
             date: "04/06/2022",
         },
         {
-            platform: "Twitch",
+            platform: "LinkedIn",
             date: "05/07/2022",
         },
         {
@@ -67,8 +67,11 @@ const Credentials = () => {
 
     return (
         <SafeAreaView style = {styles.container}>
+            {/* Header */}
+            <Text style = {styles.headerText}>Credentials</Text>
+
+            {/* Gradient container with either list of credentials or none found text */}
             <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#1F1F1F"]} style = {styles.gradientContainer}>
-            {/* Conditional Rendering to show list of credentials or text if none found */}
             {(data.length > 0) ? (
                 <FlatList data = {testData} numColumns={1} style = {styles.scrollContainer} renderItem={ ({item}) => <CredentialCard credential={item}/>}/>
                 ) : (
@@ -76,6 +79,7 @@ const Credentials = () => {
                 )    
             }
             </LinearGradient>
+
             {/* Add Credential Button */}
             <TouchableOpacity style = {styles.addButton} onPress={handleAddCredential}>
                 <Text style = {styles.bodyText}>New Credential</Text>
@@ -94,7 +98,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     gradientContainer: {
-        height: 700,
+        height: 650,
         width: 380,
         alignItems: 'center',
         justifyContent: 'center',
@@ -105,9 +109,14 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         height: "100%",
         width: "100%",
-        // borderColor: 'white',
-        // borderRadius: 20,
-        // borderWidth: 1,
+        borderRadius: 16,
+    },
+    headerText: {
+        fontSize: 24,
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 20,
     },
     bodyText: {
         fontSize: 18,
