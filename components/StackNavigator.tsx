@@ -20,7 +20,7 @@ const Tabs = createBottomTabNavigator();
 
 function TabNavigator() { //Contains all pages that have bottom tab navigator
     return (
-        <Tabs.Navigator initialRouteName = "Profile" screenOptions={{tabBarStyle: {backgroundColor: "black"}}}>
+        <Tabs.Navigator initialRouteName = "Profile" screenOptions={{tabBarStyle: {backgroundColor: "#141414"}}}>
             <Tabs.Screen 
               name="Credentials"
               component={Credentials} 

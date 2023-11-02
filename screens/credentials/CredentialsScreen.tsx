@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { SafeAreaView, Text, View, StyleSheet, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import useAuth from '../../hooks/useAuth';
 import { useLayoutEffect, useState } from 'react';
@@ -51,7 +51,8 @@ const Credentials = () => {
     }
 
     return (
-        <View style = {styles.container}>
+        <SafeAreaView style = {styles.container}>
+            <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#111111"]} style = {styles.gradientContainer}>
             {/* Conditional Rendering to show list of credentials or text if none found */}
             {(data.length > 0) ? (
                 <FlatList data = {sampleData} numColumns={1} style = {styles.scrollContainer} renderItem={ ({item}) => <CredentialCard  
@@ -65,13 +66,12 @@ const Credentials = () => {
                 <Text style = {styles.bodyText}>No Credentials Found</Text>
                 )    
             }
+            </LinearGradient>
+            {/* Add Credential Button */}
             <TouchableOpacity style = {styles.addButton} onPress={handleAddCredential}>
-                <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#111111"]} style = {styles.gradientContainer}>
-                    <Text style = {styles.plus}>+   </Text>
-                    <Text style = {styles.bodyText}>Add Credential</Text>
-                </LinearGradient>
+                <Text style = {styles.bodyText}>New Credential</Text>
             </TouchableOpacity>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -85,24 +85,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     gradientContainer: {
-        flexDirection: 'row',
-        flex: 1,
-        justifyContent: 'center',
+        height: 700,
+        width: 380,
         alignItems: 'center',
-        height: 60,
-        width: 200,
+        justifyContent: 'center',
         borderRadius: 30,
-    },
+        padding: 15,
+        marginTop: 10,
+      },
     scrollContainer: {
-        width: 350,
+        height: 650,
+        width: 340,
         borderColor: 'white',
         borderWidth: 1,
-    },
-    headerText: {
-        fontSize: 24,
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
     },
     bodyText: {
         fontSize: 18,
@@ -110,16 +105,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
     },
-    plus: {
-        fontSize: 24,
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
     addButton: {
-        marginTop: 20,
-        width: "auto",
-        height: 60,
+        backgroundColor: '#2F2F2F',
+        marginTop: 10,
+        width: 180,
+        borderRadius: 40,
+        height: 45,
         justifyContent: 'center',
         alignItems: 'center',
     },
