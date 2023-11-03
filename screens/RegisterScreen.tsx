@@ -1,16 +1,20 @@
+//@ts-ignore
+import { createDidDoc, createGenesisBlock } from "../functions/did.ts"
 import { Text, View, StyleSheet, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import React, { useState, useLayoutEffect, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-//@ts-ignore
-import  { createDidDoc } from '../../functions/did.ts';
+import useAuth from '../hooks/useAuth';
 
 const Register = () => {
 
     const navigation = useNavigation(); // enable navigation
+    const { register } = useAuth(); // enable auth functionality
 
     const [URL, setURL] = useState<string>('');
     const [name, setName] = useState<string>('');
+    const [bio, setBio] = useState<string>('');
+    const [pin, setPin] = useState<string>('');
 
     useLayoutEffect(() => { // disable header
         navigation.setOptions({
@@ -20,13 +24,25 @@ const Register = () => {
     }, [navigation]);
 
     function handleCreate() {
-        if(URL !== '' && name !== '') {
-            let didDoc = createDidDoc(name, URL);
+
+        if(URL !== '' && name !== '' && bio !== '' && pin !== '' && pin.length === 4) {
+            const starterSigchain = [];
+            const didDoc = createDidDoc(name, URL);
+
+            const sampleUser = {
+                displayName: name,
+                did: didDoc.id,
+                bio: bio,
+                pin: pin,
+                sigchain: starterSigchain.push(createGenesisBlock()),
+            }
+            // @ts-ignore – this line may be broken
+            register(sampleUser);
             // @ts-ignore
-            navigation.navigate('RegisterResults', {didDoc: didDoc});
+            navigation.navigate('Login');
         }
         else {
-            alert('Please fill out all fields');
+            alert('Fill out all fields, and make sure pin is 4 digits');
         }
     }
 
@@ -34,6 +50,7 @@ const Register = () => {
         <View style = {styles.container}>
             {/*Header*/}
             <Text style = {styles.text}>Enter your info below to create your DID</Text>
+
             {/*Inputs*/}
             <TextInput
                 style = {styles.input}
@@ -47,6 +64,20 @@ const Register = () => {
                 placeholderTextColor="grey"
                 onChange={(e) => {setName(e.nativeEvent.text)}}
             />
+            <TextInput
+                style = {styles.input}
+                placeholder='Bio'
+                placeholderTextColor="grey"
+                onChange={(e) => {setBio(e.nativeEvent.text)}}
+            />
+            <TextInput
+                style = {styles.input}
+                placeholder='4 Digit Pin'
+                placeholderTextColor="grey"
+                onChange={(e) => {setPin(e.nativeEvent.text)}}
+                keyboardType="numeric"
+            />
+
             {/*Submit Button*/}
             <TouchableOpacity style = {styles.submitButton} onPress={handleCreate}>
                 <Text style = {styles.text}>Create DID</Text>

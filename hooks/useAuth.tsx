@@ -2,12 +2,20 @@ import { createContext, useContext, useEffect, useState } from 'react'
 // @ts-ignore
 import * as Storage from "../functions/storage.ts"
 
+type userType = { // Typescript type for the user object
+    displayName: string,
+    did: string,
+    bio: string,
+    pin: string,
+    sigchain: Array<Object>
+}
+
 export const AuthContext = createContext({
     currentUser: "",
     setCurrentUser: (user:string) => {},
     login: (pin:string) => {},
     logout: () => {},
-    register: (displayName:string, did:string, bio:string, pin:string, sigchain:[]) => {},
+    register: (user:userType) => {},
 })
 
 // @ts-ignore
@@ -26,34 +34,38 @@ export const AuthProvider = ({ children }) => {
     async function login(pin: string) {
         if(pin === '1234') {
             setCurrentUser("Display Name");
+            return true;
         }
+        return false;
 
         // TODO: uncomment this code when storage is finished, this should work for login
 
-        // const users = await Storage.getItem(users);
-        // const user = users.find((user) => user.pin === pin);
+        // const users = JSON.parse(await Storage.getItem("users") || "[]");
+        // const user = users.find((user:userType) => user.displayName === currentUser);
+
+        // console.log("userType: "+user)
 
         // if(pin === user.pin) {
         //     return true;
         // }
-        // else {
-        //     return false
-        // }
+        // return false;
     }
+
     function logout() {
         setCurrentUser("");
     }
-    async function register(displayName:string, did:string, bio:string, pin:string, sigchain:[]) { // TODO: implement register function
-        const user = {
-            displayName: displayName,
-            did: did,
-            bio: bio,
-            pin: pin,
-            sigchain: sigchain
+
+    async function register(user:userType) { // TODO: implement register function
+        const userData = {
+            displayName: user.displayName,
+            did: user.did,
+            bio: user.bio,
+            pin: user.pin,
+            sigchain: user.sigchain
         }
 
         const users = JSON.parse(await Storage.getItem("users") || "[]") // put the "|| []" there to make it shut up
-        users.push(user);
+        users.push(userData);
 
         console.log(users)
 

@@ -1,6 +1,5 @@
 import { SafeAreaView, Text, View, StyleSheet, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import useAuth from '../../hooks/useAuth';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -9,41 +8,40 @@ import CredentialCard from '../../components/CredentialCard';
 const Credentials = () => {
 
     const navigation = useNavigation(); // enable navigation
-    const { currentUser } = useAuth(); // enable auth functionality
 
     const [data, setData] = useState<Array<Object>>([]); // TODO: replace with actual data from sigchain
 
     const testData = [ // sample data, actual data will come from sigchain
         {
-            platform: 'Twitter',
+            service: 'Twitter',
             date: '01/03/2021',
         },
         {
-            platform: 'Github',
+            service: 'Github',
             date: '02/01/2021',
         },
         {
-            platform: 'StackOverflow',
+            service: 'StackOverflow',
             date: '05/05/2021',
         },
         {
-            platform: "Facebook",
+            service: "Facebook",
             date: "02/03/2022",
         },
         {
-            platform: "Instagram",
+            service: "Instagram",
             date: "03/05/2022",
         },
         {
-            platform: "Reddit",
+            service: "Reddit",
             date: "04/06/2022",
         },
         {
-            platform: "LinkedIn",
+            service: "LinkedIn",
             date: "05/07/2022",
         },
         {
-            platform: "Discord",
+            service: "Discord",
             date: "06/08/2022",
         },
     ];

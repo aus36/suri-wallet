@@ -5,13 +5,13 @@ import { useNavigation } from '@react-navigation/core';
 // type credentialProps = {
 //   credential: {
 //     id: number;
-//     platform: string;
+//     service: string;
 //     date: string;
 //   };
 // };
 
-function getImagePath(platform:string) { // function to get social media images for each platform or default image if none found
-  switch(platform) {
+function getImagePath(service:string) { // function to get social media images for each service or default image if none found
+  switch(service) {
     default:
       return require('../assets/icon.png');
       break;
@@ -47,7 +47,7 @@ const CredentialCard = (props) => {
 
   const navigation = useNavigation(); // enable navigation
   
-  const imageSource = getImagePath(props.credential.platform); // fetch image path for current card
+  const imageSource = getImagePath(props.credential.service); // fetch image path for current card
 
   return ( // @ts-ignore
     <TouchableOpacity onPress={() => {navigation.navigate("CredentialModification", props.credential)}} style={styles.container}>
@@ -60,7 +60,7 @@ const CredentialCard = (props) => {
         {/* Text container */}
         <View style = {styles.textContainer}>
           <View style={styles.column}>
-            <Text style={styles.bodyText}>{props.credential.platform}</Text>
+            <Text style={styles.bodyText}>{props.credential.service}</Text>
             <Text style={styles.bodyText}>{props.credential.date}</Text>
           </View>
         </View>

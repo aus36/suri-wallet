@@ -3,6 +3,8 @@ import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-na
 import { useNavigation } from '@react-navigation/native';
 import React, { useLayoutEffect } from 'react';
 import CredentialCard from '../components/CredentialCard';
+// @ts-ignore
+import * as Storage from '../functions/storage.ts';
 
 const Dev = () => {
 
@@ -15,17 +17,14 @@ const Dev = () => {
         });
     }, [navigation]);
 
+    async function handleBigGreenButton() {
+        await Storage.removeUser("Austin Hale")
+        await Storage.getItem('users')
+    }
+
     const testData = [ // sample data, actual data will come from sigchain
         {
-            platform: 'Twitter',
-            date: '01/01/2021',
-        },
-        {
-            platform: 'Github',
-            date: '01/01/2021',
-        },
-        {
-            platform: 'Steam',
+            service: 'Twitter',
             date: '01/01/2021',
         },
     ];
@@ -33,8 +32,8 @@ const Dev = () => {
     return (
         <SafeAreaView style = {styles.container}>
             <Text style = {styles.headerText}>Dev Screen</Text>
-            <CredentialCard credential={testData[1]}/>
-            <TouchableOpacity style = {styles.actionButton} onPress={() => {}}>
+            <CredentialCard credential={testData[0]}/>
+            <TouchableOpacity style = {styles.actionButton} onPress={() => {handleBigGreenButton()}}>
                 <Text style = {styles.bodyText}>Big Green Button</Text>
             </TouchableOpacity>
         </SafeAreaView>

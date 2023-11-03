@@ -3,7 +3,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/core';
 import useAuth from '../hooks/useAuth';
 import React, { useState, useMemo } from 'react';
-import { AntDesign } from '@expo/vector-icons';
 
 const Login = () => {
 
@@ -37,8 +36,14 @@ const Login = () => {
   }
 
   function handleLogin() { // function for login button
+    // if(login(pin)) {
+    //   setPin('');
+    //   // @ts-ignore
+    //   navigation.navigate('Tabs');
+    // }
+
     login(pin);
-    
+
     if (pin === '1234') { // TODO: remove this code once login is done
       setPin(''); // clear pin if successful login
       // @ts-ignore

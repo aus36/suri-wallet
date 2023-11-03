@@ -3,8 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Login from '../screens/LoginScreen';
-import Register from '../screens/registration/RegisterScreen';
-import RegistrationResultScreen from '../screens/registration/RegistrationResultScreen';
+import Register from '../screens/RegisterScreen';
 import Settings from '../screens/SettingsScreen';
 import Credentials from '../screens/credentials/CredentialsScreen';
 import CredentialModification from '../screens/credentials/CredentialModificationScreen';
@@ -71,7 +70,6 @@ export default function StackNavigator() {
         <Stack.Navigator initialRouteName='Login'>
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
-            <Stack.Screen name="RegisterResults" component={RegistrationResultScreen} initialParams={{didDoc: {}, SCVP: {}}}/>
             <Stack.Screen name="CredentialModification" component={CredentialModification} />
             <Stack.Screen name="NewCredential" component={NewCredential} />
             <Stack.Screen name="Users" component={Users} />
