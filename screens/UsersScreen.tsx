@@ -1,14 +1,18 @@
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import useAuth from '../hooks/useAuth';
-import { useLayoutEffect } from 'react';
-import * as SecureStore from 'expo-secure-store';
+import { useEffect, useLayoutEffect } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
+import React, { useState } from 'react';
+// @ts-ignore
+import * as Storage from "../functions/storage.ts"
+// @ts-ignore
+import UserCard from '../components/UserCard.tsx';
 
 const Users = () => {
+
+        const [users, setUsers] = useState<Array<Object>>([]);
     
         const navigation = useNavigation(); // enable navigation
-
-        const { currentUser } = useAuth(); // enable auth functionality
 
         useLayoutEffect(() => { // disable header
             navigation.setOptions({
@@ -21,14 +25,37 @@ const Users = () => {
             // @ts-ignore
             navigation.navigate('Login');
         }
+
+        useEffect(() => { // useEffect to initialize users list
+            const usersList = async () => JSON.parse(await Storage.getItem("users") || "[]");
+            usersList().then((usersList) => setUsers(usersList));
+        },[]);
     
         return (
             <SafeAreaView style = {styles.container}>
+                {/* Header */}
                <Text style = {styles.headerText}>Users Screen</Text>
+               
+               {/* Users Display */}
+                <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#1F1F1F"]} style = {styles.gradientContainer}>
+                    <ScrollView style = {styles.scrollContainer}>
+                        <FlatList
+                            data={users}
+                            renderItem={({ item }) => (
+                                <UserCard user={item} />
+                            )}
+                            keyExtractor={item => item.id}
+                        />
+                    </ScrollView>
+                </LinearGradient>
+
+                {/* Skip Button */}
                <TouchableOpacity style = {styles.actionButton} onPress={() => {handlePress()}}>
-                    <Text style = {styles.bodyText}>Skip Screen</Text>
+                    <Text style = {styles.bodyText}>Skip</Text>
                </TouchableOpacity>
-               <TouchableOpacity // @ts-ignore 
+
+               {/* Register Button */}
+               <TouchableOpacity // @ts-ignore
                     onPress={() => navigation.navigate('Register')}
                     style = {styles.registerButton}>
                     <Text style = {styles.registerButtonText}>Don't have an account? Tap here.</Text>
@@ -45,6 +72,18 @@ const styles = StyleSheet.create({
       backgroundColor: '#141414',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    gradientContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 350,
+        height: 400,
+        marginBottom: 30,
+        borderRadius: 30,
+    },
+    scrollContainer: {
+        width: 350,
+        height: 400,
     },
     headerText: {
         fontSize: 36,

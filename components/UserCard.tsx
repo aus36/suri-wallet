@@ -14,7 +14,7 @@ import { useNavigation } from '@react-navigation/core';
 // };
 
 // @ts-ignore
-const CredentialCard = (props) => {
+const UserCard = (props) => {
     
     const navigation = useNavigation(); // enable navigation
     const { setCurrentUser } = useAuth(); // enable auth functionality
@@ -39,7 +39,7 @@ const CredentialCard = (props) => {
     );
 };
 
-export default CredentialCard;
+export default UserCard;
 
 const styles = StyleSheet.create({
   container: {

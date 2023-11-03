@@ -7,7 +7,7 @@ import React, { useState, useMemo } from 'react';
 const Login = () => {
 
   const navigation = useNavigation(); // enable navigation
-  const { currentUser, login } = useAuth(); // enable user functionality
+  const { currentUser, setCurrentUser, login } = useAuth(); // enable user functionality
 
   const [pin, setPin] = useState('');
   const [displayPin, setDisplayPin] = useState('');
@@ -126,7 +126,7 @@ const Login = () => {
 
       {/* Switch User Button */}
       {/* @ts-ignore */}
-      <TouchableOpacity style = {styles.switchUserButton} onPress={() => {navigation.navigate("Users")}}>
+      <TouchableOpacity style = {styles.switchUserButton} onPress={() => {navigation.navigate("Users"); setCurrentUser("")}}>
         <Text style = {styles.bodyText}>Switch User</Text>
       </TouchableOpacity>
     </View>
