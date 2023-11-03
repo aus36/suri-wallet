@@ -13,7 +13,7 @@ export const AuthContext = createContext({
 // @ts-ignore
 export const AuthProvider = ({ children }) => {
 
-    useEffect(() => { // useEffect to initialize users if it doesn't exista
+    useEffect(() => { // useEffect to initialize users if it doesn't exist
         async () => {
             if(await Storage.getItem("users") === null) {
                 await Storage.setItem("users", []);
@@ -30,7 +30,8 @@ export const AuthProvider = ({ children }) => {
 
         // TODO: uncomment this code when storage is finished, this should work for login
 
-        // const user = await Storage.getItem(displayName);
+        // const users = await Storage.getItem(users);
+        // const user = users.find((user) => user.pin === pin);
 
         // if(pin === user.pin) {
         //     return true;
@@ -51,7 +52,12 @@ export const AuthProvider = ({ children }) => {
             sigchain: sigchain
         }
 
-        Storage.setItem("users", user);
+        const users = JSON.parse(await Storage.getItem("users") || "[]") // put the "|| []" there to make it shut up
+        users.push(user);
+
+        console.log(users)
+
+        Storage.setItem("users", users);
     }
 
     return (

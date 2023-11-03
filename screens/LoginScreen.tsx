@@ -36,10 +36,10 @@ const Login = () => {
     }
   }
 
-  function handleLogin() { // TODO: implement proper pin auth
-    login(pin, "test");
+  function handleLogin() { // function for login button
+    login(pin);
     
-    if (pin === '1234') {
+    if (pin === '1234') { // TODO: remove this code once login is done
       setPin(''); // clear pin if successful login
       // @ts-ignore
       navigation.navigate('Tabs');
@@ -56,15 +56,11 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
-      {/* Back Button */}
-      {/* @ts-ignore */}
-      <TouchableOpacity style = {styles.backButton} onPress = {() => navigation.navigate("Users")}>
-        <AntDesign name="back" size={24} color="white" />
-      </TouchableOpacity>
       {/* Logo */}
       <Image source={require('../assets/SURI-logo.png')} style={styles.logo}/>
-      <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#111111"]} style = {styles.gradientContainer}>
-        {/* Pin display */}
+      
+      {/* Pin display */}
+      <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#1F1F1F"]} style = {styles.gradientContainer}>
         <View>
           <Text style = {styles.displayPin}>{displayPin}</Text>
         </View>
@@ -104,6 +100,7 @@ const Login = () => {
             </TouchableOpacity>
           </View>
         </View>
+
         {/* Buttons */}
         <View style={styles.pinRow}>
           <TouchableOpacity // @ts-ignore 
@@ -118,6 +115,14 @@ const Login = () => {
           </TouchableOpacity>
         </View>
       </LinearGradient>
+
+      {/* Current User */}
+      <Text style = {styles.userText}>Current User: {currentUser || "Under Construction"}</Text>
+
+      {/* Switch User Button */}
+      <TouchableOpacity style = {styles.switchUserButton} onPress={() => {}}>
+        <Text style = {styles.bodyText}>Switch User</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -188,16 +193,21 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 40,
   },
-  backButton: {
-    top: 50,
-    left: 10,
-    position: 'absolute',
-    width: 60,
+  switchUserButton: {
+    width: 130,
     height: 40,
     borderRadius: 10,
-    borderWidth: 1,
-    borderColor: 'white',
+    backgroundColor: "grey",
     justifyContent: 'center',
     alignItems: 'center',
+},
+userText: {
+  marginVertical: 20,
+  color: 'white',
+  fontSize: 20,
+},
+bodyText: {
+  color: 'white',
+  fontSize: 20,
 },
 });

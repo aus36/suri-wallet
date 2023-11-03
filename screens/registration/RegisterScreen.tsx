@@ -12,11 +12,6 @@ const Register = () => {
     const [URL, setURL] = useState<string>('');
     const [name, setName] = useState<string>('');
 
-    const keyPair = { //TODO: actually generate keypair using crypto
-        publicKey: "12309123810230",
-        privateKey: "12309123810230"
-    }
-
     useLayoutEffect(() => { // disable header
         navigation.setOptions({
             headerShown: false,
