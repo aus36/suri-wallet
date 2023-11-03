@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/core';
 
 // type credentialProps = {
 //   credential: {
@@ -43,15 +44,20 @@ function getImagePath(platform:string) { // function to get social media images 
 
 // @ts-ignore
 const CredentialCard = (props) => {
-  
-  const imageSource = getImagePath(props.credential.platform);
 
-  return (
-    <TouchableOpacity onPress={() => {}} style={styles.container}>
+  const navigation = useNavigation(); // enable navigation
+  
+  const imageSource = getImagePath(props.credential.platform); // fetch image path for current card
+
+  return ( // @ts-ignore
+    <TouchableOpacity onPress={() => {navigation.navigate("CredentialModification", props.credential)}} style={styles.container}>
       <View style={styles.row}>
+        {/* Image container */}
         <View style={styles.imageContainer}>
           <Image style = {styles.image} source={imageSource} />
         </View>
+
+        {/* Text container */}
         <View style = {styles.textContainer}>
           <View style={styles.column}>
             <Text style={styles.bodyText}>{props.credential.platform}</Text>

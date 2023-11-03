@@ -120,7 +120,8 @@ const Login = () => {
       <Text style = {styles.userText}>Current User: {currentUser || "Under Construction"}</Text>
 
       {/* Switch User Button */}
-      <TouchableOpacity style = {styles.switchUserButton} onPress={() => {}}>
+      {/* @ts-ignore */}
+      <TouchableOpacity style = {styles.switchUserButton} onPress={() => {navigation.navigate("Users")}}>
         <Text style = {styles.bodyText}>Switch User</Text>
       </TouchableOpacity>
     </View>

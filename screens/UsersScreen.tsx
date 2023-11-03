@@ -26,7 +26,7 @@ const Users = () => {
             <SafeAreaView style = {styles.container}>
                <Text style = {styles.headerText}>Users Screen</Text>
                <TouchableOpacity style = {styles.actionButton} onPress={() => {handlePress()}}>
-                    <Text style = {styles.bodyText}>go next</Text>
+                    <Text style = {styles.bodyText}>Skip Screen</Text>
                </TouchableOpacity>
                <TouchableOpacity // @ts-ignore 
                     onPress={() => navigation.navigate('Register')}

@@ -68,7 +68,7 @@ function TabNavigator() { // contains all pages that have bottom tab navigator
 export default function StackNavigator() {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName='Users'>
+        <Stack.Navigator initialRouteName='Login'>
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
             <Stack.Screen name="RegisterResults" component={RegistrationResultScreen} initialParams={{didDoc: {}, SCVP: {}}}/>

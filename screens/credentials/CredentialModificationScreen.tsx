@@ -1,10 +1,23 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+import * as Storage from '../../functions/storage';
+import { useLayoutEffect } from 'react';
 
 const CredentialModification = () => {
+
+    const navigation = useNavigation(); // enable navigation
+
+    useLayoutEffect(() => { // disable header
+        navigation.setOptions({
+            headerShown: false,
+            gestureEnabled: false,
+        });
+    }, [navigation]);
+
     return (
-        <View>
-            <Text>Credential Modification Screen</Text>
-        </View>
+        <SafeAreaView style = {styles.container}>
+            <Text style = {styles.headerText}>Credential Modification Screen</Text>
+        </SafeAreaView>
     );
 }
 
@@ -16,5 +29,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#141414',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    bodyText: {
+        color: 'white',
+        fontSize: 20,
+    },
+    headerText: {
+        color: 'white',
+        fontSize: 24,
+        fontWeight: 'bold',
     },
 });
