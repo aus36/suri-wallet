@@ -12,15 +12,15 @@ function createGenesisBlock() {
     return genesisBlock;
 }
 
-async function addBlock(data:Object, sigchain: Array<Object>) {
+async function addBlock(data:Object, sigchain: Array<Object>):Promise<Array<Object>> {
     const block = {
         seqno: sigchain.length,
-        prev: await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA512,sigchain[sigchain.length-1].toString()),
+        prev: await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA512,sigchain[sigchain.length-1].toString()), // hashes the previous link in the chain
         timestamp: Date.now(),
         data: data,
     };
-    
-    return sigchain.push(block);
+    sigchain.push(block);
+    return sigchain;
 }
 
 export { createGenesisBlock, addBlock };

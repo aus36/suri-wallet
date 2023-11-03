@@ -19,7 +19,7 @@ const Settings = () => {
     function handleLogout() {
         logout();
         // @ts-ignore
-        navigation.navigate('Login');
+        navigation.navigate('Users');
     }
 
     return (

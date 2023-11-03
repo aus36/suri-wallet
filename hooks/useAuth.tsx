@@ -32,23 +32,15 @@ export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<string>("")
 
     async function login(pin: string) {
-        if(pin === '1234') {
-            setCurrentUser("Display Name");
+
+        const user = await Storage.getUser(currentUser);
+
+        console.log("userType: "+user)
+
+        if(pin === user.pin) {
             return true;
         }
         return false;
-
-        // TODO: uncomment this code when storage is finished, this should work for login
-
-        // const users = JSON.parse(await Storage.getItem("users") || "[]");
-        // const user = users.find((user:userType) => user.displayName === currentUser);
-
-        // console.log("userType: "+user)
-
-        // if(pin === user.pin) {
-        //     return true;
-        // }
-        // return false;
     }
 
     function logout() {
@@ -64,10 +56,10 @@ export const AuthProvider = ({ children }) => {
             sigchain: user.sigchain
         }
 
-        const users = JSON.parse(await Storage.getItem("users") || "[]") // put the "|| []" there to make it shut up
+        const users = JSON.parse(await Storage.getItem("users") || "[]");
         users.push(userData);
 
-        console.log(users)
+        console.log(users);
 
         Storage.setItem("users", users);
     }

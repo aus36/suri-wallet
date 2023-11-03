@@ -6,10 +6,12 @@ import useAuth from '../hooks/useAuth';
 import { useNavigation } from '@react-navigation/core';
 
 // type userProps = {
-//   credential: {
-//     id: number;
-//     platform: string;
-//     date: string;
+//   user: {
+//     displayName: string,
+//     did: string,
+//     bio: string,
+//     pin: string,
+//     sigchain: Array<Object>,
 //   };
 // };
 
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#212121',
+    backgroundColor: '#141414',
     marginVertical: 5,
   },
   profileLogo: {

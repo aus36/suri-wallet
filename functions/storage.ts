@@ -1,4 +1,13 @@
 import * as SecureStore from 'expo-secure-store';
+import { Alert } from 'react-native';
+
+type userType = { // Typescript type for the user object
+  displayName: string,
+  did: string,
+  bio: string,
+  pin: string,
+  sigchain: Array<Object>
+}
 
 async function getItem(query:string) {
     try {
@@ -14,6 +23,26 @@ async function getItem(query:string) {
     } catch (error) {
         console.log("error loading data from secure device storage");
     }
+  }
+
+  async function getUser(displayName:string):Promise<userType> { // clone of removeUser, but returns users instead of deleting, should work properly
+    const users = await getItem("users");
+  
+    if (users !== null && users !== undefined) {
+      const usersObject = JSON.parse(users);
+      const index = usersObject.findIndex((user:userType) => user.displayName === displayName);
+  
+      if (index !== -1) {
+        return usersObject[index];
+      }
+    }
+    return {
+      displayName: "",
+      did: "",
+      bio: "",
+      pin: "",
+      sigchain: []
+    };
   }
 
 async function setItem(key:string, value:Object) {
@@ -46,4 +75,22 @@ async function removeUser(displayName:string) { // ok, pretty sure this works no
   }
 }
 
-export { getItem, setItem, removeItem, removeUser };
+async function clearUsers() { // wipes all users from storage, be careful with this
+  Alert.alert(
+    "Confirm",
+    "Are you sure you want delete all users?",
+    [
+      {
+        text: "Cancel",
+        style: "cancel"
+      },
+      { 
+        text: "Yes", 
+        onPress: async () => await SecureStore.setItemAsync("users", JSON.stringify([]))
+      }
+    ],
+    { cancelable: true }
+  );
+}
+
+export { getItem, setItem, removeItem, removeUser, getUser, clearUsers };

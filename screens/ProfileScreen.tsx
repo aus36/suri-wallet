@@ -1,12 +1,12 @@
 import { Text, View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import useAuth from '../hooks/useAuth';
 import { LinearGradient } from 'expo-linear-gradient';
 //@ts-ignore
-import * as Sigchain from "../functions/did.ts"
+import * as Storage from "../functions/storage.ts"
 
 const Profile = () => {
 
@@ -21,6 +21,13 @@ const Profile = () => {
             gestureEnabled: false,
         });
     }, [navigation]);
+
+    useEffect(() => { // useEffect to get sigchain from storage upon first screen load
+        async () => {
+            const user = await Storage.getUser(currentUser);
+            setSigchain(user.sigchain);
+        }
+    },[]);
 
     return (
         <SafeAreaView style = {styles.container}>
@@ -43,10 +50,10 @@ const Profile = () => {
 
             {/*Sigchain Display*/}
             <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#1F1F1F"]} style = {styles.gradientContainer}>
-                {sigchain.toString() !== "" ? (
+                {JSON.stringify(sigchain, null, 2) !== "[]" ? (
                     <ScrollView style = {styles.scrollContainer}>
                         <Text style = {styles.bodyText}>
-                            {sigchain.toString()}
+                            {JSON.stringify(sigchain, null, 2)}
                         </Text>
                     </ScrollView>
                 ) : (
@@ -76,12 +83,10 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     scrollContainer: {
-        marginVertical: 10,
+        paddingVertical: 10,
         height: "100%",
         width: "100%",
-        borderColor: 'white',
         borderRadius: 20,
-        borderWidth: 1,
     },
     profileLogo: {
         borderWidth: 1,

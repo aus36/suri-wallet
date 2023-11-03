@@ -74,7 +74,7 @@ const Credentials = () => {
                 <FlatList data = {testData} numColumns={1} style = {styles.scrollContainer} renderItem={ ({item}) => <CredentialCard credential={item}/>}/>
                 ) : (
                 <Text style = {styles.bodyText}>No Credentials Found</Text>
-                )    
+                )
             }
             </LinearGradient>
 

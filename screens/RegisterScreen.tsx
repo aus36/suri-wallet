@@ -26,7 +26,8 @@ const Register = () => {
     function handleCreate() {
 
         if(URL !== '' && name !== '' && bio !== '' && pin !== '' && pin.length === 4) {
-            const starterSigchain = [];
+            let starterSigchain = [];
+            starterSigchain.push(createGenesisBlock());
             const didDoc = createDidDoc(name, URL);
 
             const sampleUser = {
@@ -34,7 +35,7 @@ const Register = () => {
                 did: didDoc.id,
                 bio: bio,
                 pin: pin,
-                sigchain: starterSigchain.push(createGenesisBlock()),
+                sigchain: starterSigchain,
             }
             // @ts-ignore – this line may be broken
             register(sampleUser);
@@ -49,7 +50,7 @@ const Register = () => {
     return (
         <View style = {styles.container}>
             {/*Header*/}
-            <Text style = {styles.text}>Enter your info below to create your DID</Text>
+            <Text style = {styles.text}>Enter your info below to create your account</Text>
 
             {/*Inputs*/}
             <TextInput
@@ -80,7 +81,7 @@ const Register = () => {
 
             {/*Submit Button*/}
             <TouchableOpacity style = {styles.submitButton} onPress={handleCreate}>
-                <Text style = {styles.text}>Create DID</Text>
+                <Text style = {styles.text}>Create Account</Text>
             </TouchableOpacity>
         </View>
     );
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
     },
     submitButton: {
         backgroundColor: 'grey',
-        width: 120,
+        width: 155,
         height: 40,
         marginTop: 20,
         borderRadius: 15,

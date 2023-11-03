@@ -1,14 +1,18 @@
 // welcome to the playground everybody
 import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import CredentialCard from '../components/CredentialCard';
 // @ts-ignore
 import * as Storage from '../functions/storage.ts';
+// @ts-ignore
+import * as DID from '../functions/did.ts';
 
 const Dev = () => {
 
     const navigation = useNavigation(); // enable navigation
+
+    const [testState, setTestState] = useState<any>(); // useState for testing various stuff
 
     useLayoutEffect(() => { // disable header
         navigation.setOptions({
@@ -18,8 +22,7 @@ const Dev = () => {
     }, [navigation]);
 
     async function handleBigGreenButton() {
-        await Storage.removeUser("Austin Hale")
-        await Storage.getItem('users')
+        Storage.clearUsers();
     }
 
     const testData = [ // sample data, actual data will come from sigchain
@@ -32,6 +35,7 @@ const Dev = () => {
     return (
         <SafeAreaView style = {styles.container}>
             <Text style = {styles.headerText}>Dev Screen</Text>
+            <Text style = {styles.headerText}>{JSON.stringify(testState, null, 2) || "test data appears here"}</Text>
             <CredentialCard credential={testData[0]}/>
             <TouchableOpacity style = {styles.actionButton} onPress={() => {handleBigGreenButton()}}>
                 <Text style = {styles.bodyText}>Big Green Button</Text>
@@ -53,6 +57,7 @@ const styles = StyleSheet.create({
         color: "white",
         fontSize: 36,
         fontWeight: "bold",
+        marginVertical: 20,
         },
     bodyText: {
         color: "white",

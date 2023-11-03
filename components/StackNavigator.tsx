@@ -14,7 +14,6 @@ import Users from '../screens/UsersScreen';
 import Dev from '../screens/DevScreen';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -36,10 +35,10 @@ function TabNavigator() { // contains all pages that have bottom tab navigator
             <Tabs.Screen 
               name="Credentials"
               component={Credentials} 
-              listeners={{tabPress: () => {Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium ); setSelected("Credentials")}}}
+              listeners={{tabPress: () => {Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium ); setSelected("Connections")}}}
               options={{
-                tabBarLabel: 'Credentials',
-                tabBarIcon: () => <Entypo name="documents" size={24} color={handleColor("Credentials")}/>,
+                tabBarLabel: 'Connections',
+                tabBarIcon: () => <Ionicons name="people" size={32} color={handleColor("Connections")} />,
               }}
             />
             <Tabs.Screen
