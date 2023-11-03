@@ -1,8 +1,7 @@
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, FlatList } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useState } from 'react';
 // @ts-ignore
 import * as Storage from "../functions/storage.ts"
 // @ts-ignore
@@ -34,19 +33,16 @@ const Users = () => {
         return (
             <SafeAreaView style = {styles.container}>
                 {/* Header */}
-               <Text style = {styles.headerText}>Users Screen</Text>
+               <Text style = {styles.headerText}>Users</Text>
                
                {/* Users Display */}
                 <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#1F1F1F"]} style = {styles.gradientContainer}>
-                    <ScrollView style = {styles.scrollContainer}>
-                        <FlatList
-                            data={users}
-                            renderItem={({ item }) => (
-                                <UserCard user={item} />
-                            )}
-                            keyExtractor={item => item.id}
-                        />
-                    </ScrollView>
+                    <FlatList style = {styles.scrollContainer}
+                        data={users}
+                        renderItem={({ item }) => (
+                            <UserCard user={item} />
+                        )}
+                    />
                 </LinearGradient>
 
                 {/* Skip Button */}
@@ -76,7 +72,7 @@ const styles = StyleSheet.create({
     gradientContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: 350,
+        width: 360,
         height: 400,
         marginBottom: 30,
         borderRadius: 30,

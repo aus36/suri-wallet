@@ -33,7 +33,7 @@ const UserCard = (props) => {
                 ) : (
                     <AntDesign name="user" size={36} color="white" style = {styles.profileLogo}/>
                 )}
-                <Text>{props.user.displayName}</Text>
+                <Text style = {styles.bodyText}>{props.user.displayName}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   container: {
     height: 110,
     width: "100%",
-    borderRadius: 20,
+    borderRadius: 30,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     borderColor: 'white',
     padding: 15,
-    marginBottom: 20,
+    marginRight: 40,
+    right: 10,
 },
   headerText: {
     color: 'white',
