@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
@@ -7,6 +7,7 @@ import useAuth from '../hooks/useAuth';
 import { LinearGradient } from 'expo-linear-gradient';
 //@ts-ignore
 import * as Storage from "../functions/storage.ts"
+import CredentialCard from '../components/CredentialCard';
 
 const Profile = () => {
 
@@ -14,6 +15,48 @@ const Profile = () => {
     const { currentUser } = useAuth(); // enable auth functionality
 
     const [sigchain, setSigchain] = useState<Array<Object>>([]); // TODO: replace with actual data from sigchain
+
+    const [data, setData] = useState<Array<Object>>([]); // TODO: replace with actual data from sigchain
+
+    const testData = [ // sample data, actual data will come from sigchain
+        {
+            service: 'Twitter',
+            date: '01/03/2021',
+        },
+        {
+            service: 'Github',
+            date: '02/01/2021',
+        },
+        {
+            service: 'StackOverflow',
+            date: '05/05/2021',
+        },
+        {
+            service: "Facebook",
+            date: "02/03/2022",
+        },
+        {
+            service: "Instagram",
+            date: "03/05/2022",
+        },
+        {
+            service: "Reddit",
+            date: "04/06/2022",
+        },
+        {
+            service: "LinkedIn",
+            date: "05/07/2022",
+        },
+        {
+            service: "Discord",
+            date: "06/08/2022",
+        },
+    ];
+
+    useEffect(() => {
+        setData(testData);
+    },[]);
+
 
     useLayoutEffect(() => { // disable header
         navigation.setOptions({
@@ -36,7 +79,7 @@ const Profile = () => {
 
             {/*Header*/}
             {/* @ts-ignore */}
-            <Text style = {styles.headerText}>{currentUser}</Text>
+            <Text style = {styles.headerText}>{currentUser || "No display name"}</Text>
 
             {/*Buttons*/}
             <View style = {styles.row}>
@@ -48,17 +91,14 @@ const Profile = () => {
                 </TouchableOpacity>
             </View>
 
-            {/*Sigchain Display*/}
+            {/* Gradient container with either list of credentials or none found text */}
             <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#1F1F1F"]} style = {styles.gradientContainer}>
-                {JSON.stringify(sigchain, null, 2) !== "[]" ? (
-                    <ScrollView style = {styles.scrollContainer}>
-                        <Text style = {styles.bodyText}>
-                            {JSON.stringify(sigchain, null, 2)}
-                        </Text>
-                    </ScrollView>
+            {(data.length > 0) ? (
+                <FlatList data = {testData} numColumns={1} style = {styles.scrollContainer} renderItem={ ({item}) => <CredentialCard credential={item}/>}/>
                 ) : (
-                    <Text style={styles.bodyText}>No sigchain found</Text>
-                )}
+                <Text style = {styles.bodyText}>No Credentials Found</Text>
+                )
+            }
             </LinearGradient>
         </SafeAreaView>
     );

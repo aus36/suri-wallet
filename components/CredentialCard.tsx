@@ -73,7 +73,7 @@ export default CredentialCard;
 
 const styles = StyleSheet.create({
   container: {
-    height: 110,
+    height: 100,
     width: "100%",
     borderRadius: 20,
     flexDirection: 'column',
