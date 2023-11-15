@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import CredentialCard from '../../components/CredentialCard';
+import UserCard from '../../components/UserCard';
 
 const Credentials = () => {
 
@@ -66,21 +67,23 @@ const Credentials = () => {
     return (
         <SafeAreaView style = {styles.container}>
             {/* Header */}
-            <Text style = {styles.headerText}>Credentials</Text>
+            <Text style = {styles.headerText}>Connections</Text>
 
             {/* Gradient container with either list of credentials or none found text */}
             <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#1F1F1F"]} style = {styles.gradientContainer}>
-            {(data.length > 0) ? (
-                <FlatList data = {testData} numColumns={1} style = {styles.scrollContainer} renderItem={ ({item}) => <CredentialCard credential={item}/>}/>
-                ) : (
-                <Text style = {styles.bodyText}>No Credentials Found</Text>
-                )
-            }
+                <FlatList
+                    numColumns={1}
+                    style = {styles.scrollContainer}
+                    data = {data}
+                    renderItem = {({item}) => <CredentialCard credential={item} />}
+                    keyExtractor = {(item, index) => index.toString()}
+                    ListEmptyComponent = {() => <Text style = {styles.bodyText}>No Connections Found</Text>}
+                />
             </LinearGradient>
 
             {/* Add Credential Button */}
             <TouchableOpacity style = {styles.addButton} onPress={handleAddCredential}>
-                <Text style = {styles.bodyText}>New Credential</Text>
+                <Text style = {styles.bodyText}>New Connection</Text>
             </TouchableOpacity>
         </SafeAreaView>
     );
