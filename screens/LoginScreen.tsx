@@ -3,6 +3,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/core';
 import useAuth from '../hooks/useAuth';
 import React, { useState, useMemo } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+
 
 const Login = () => {
 
@@ -29,9 +31,15 @@ const Login = () => {
     }
   },[pin]);
 
-  function handlePress(num: string) { // function for pressing pin buttons
-    if (pin.length < 4) {
-      setPin(pin + num);
+  function handlePress(entry: string) { // function for pressing pin buttons
+    if (pin.length < 4 && entry.length === 1) {
+      setPin(pin + entry);
+    }
+    else if(entry === "backspace") {
+      setPin(pin.slice(0, -1));
+    }
+    else if(entry === "enter") {
+      handleLogin();
     }
   }
 
@@ -55,17 +63,16 @@ const Login = () => {
       navigation.navigate('Dev');
     }
     else {
-      alert("Incorrect PIN");
+      alert("Incorrect PIN for " + currentUser);
     }
   }
 
   return (
     <View style={styles.container}>
       {/* Logo */}
-      <Image source={require('../assets/SURI-logo.png')} style={styles.logo}/>
+      <Image source={require('../assets/suriLogo-white.png')} style={styles.logo}/>
       
       {/* Pin display */}
-      <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#1F1F1F"]} style = {styles.gradientContainer}>
         <View>
           <Text style = {styles.displayPin}>{displayPin}</Text>
         </View>
@@ -104,30 +111,23 @@ const Login = () => {
               <Text style = {styles.pinButtonText}>9</Text>
             </TouchableOpacity>
           </View>
+          <View style={styles.pinRow}>
+            <TouchableOpacity onPress={() => handlePress("backspace")} style={styles.altPinButton}>
+              <Ionicons name="backspace-outline" size={36} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handlePress("0")} style={styles.pinButton}>
+              <Text style = {styles.pinButtonText}>0</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handlePress("enter")} style={styles.altPinButton}>
+              <Ionicons name="enter-outline" size={36} color="black" />
+            </TouchableOpacity>
+          </View>
         </View>
-
-        {/* Buttons */}
-        <View style={styles.pinRow}>
-          <TouchableOpacity // @ts-ignore 
-            onPress={() => {handleLogin();}}
-            style = {styles.loginButton}>
-            <Text style = {styles.actionButtonText}>Login</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setPin(pin.slice(0, -1))}
-            style = {styles.deleteButton}>
-            <Text style = {styles.actionButtonText}>Delete</Text>
-          </TouchableOpacity>
-        </View>
-      </LinearGradient>
-
-      {/* Current User */}
-      <Text style = {styles.userText}>Current User: {currentUser || "Under Construction"}</Text>
 
       {/* Switch User Button */}
       {/* @ts-ignore */}
       <TouchableOpacity style = {styles.switchUserButton} onPress={() => {navigation.navigate("Users"); setCurrentUser("")}}>
-        <Text style = {styles.bodyText}>Switch User</Text>
+        <Text style = {styles.buttonText}>Switch User</Text>
       </TouchableOpacity>
     </View>
   );
@@ -138,19 +138,14 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#141414',
+    backgroundColor: '#303030',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  gradientContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 30,
-    padding: 15,
   },
   logo: {
-    height: 200,
-    width: 350,
+    height: 150,
+    width: 300,
+    resizeMode: 'contain',
   },
   pinPad: {
     marginBottom: 0,
@@ -178,17 +173,30 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   pinButton: {
-    height: 80,
-    width: 80,
-    borderColor: 'white',
-    borderWidth: 1,
-    margin: 20,
-    borderRadius: 30,
+    height: 90,
+    width: 90,
+    margin: 10,
+    borderRadius: 999,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#606060',
+  },
+  altPinButton: {
+    height: 90,
+    width: 90,
+    margin: 10,
+    borderRadius: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    color: 'black',
   },
   pinButtonText: {
     color: 'white',
+    fontSize: 40,
+  },
+  pinButtonAltText: {
+    color: 'black',
     fontSize: 40,
   },
   pinRow: {
@@ -198,14 +206,20 @@ const styles = StyleSheet.create({
   displayPin: {
     color: 'white',
     fontSize: 40,
+    marginBottom: 20,
   },
   switchUserButton: {
-    width: 130,
+    marginTop: 20,
     height: 40,
-    borderRadius: 10,
-    backgroundColor: "grey",
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    backgroundColor: "white",
     justifyContent: 'center',
     alignItems: 'center',
+},
+buttonText: {
+  color: 'black',
+  fontSize: 20,
 },
 userText: {
   marginVertical: 20,
