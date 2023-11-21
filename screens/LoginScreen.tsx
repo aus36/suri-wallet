@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/core';
 import useAuth from '../hooks/useAuth';
 import React, { useState, useMemo } from 'react';
@@ -195,10 +194,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 40,
   },
-  pinButtonAltText: {
-    color: 'black',
-    fontSize: 40,
-  },
   pinRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -217,17 +212,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
 },
-buttonText: {
-  color: 'black',
-  fontSize: 20,
-},
-userText: {
-  marginVertical: 20,
-  color: 'white',
-  fontSize: 20,
-},
-bodyText: {
-  color: 'white',
-  fontSize: 20,
-},
+  buttonText: {
+    color: 'black',
+    fontSize: 20,
+  },
+  bodyText: {
+    color: 'white',
+    fontSize: 20,
+  },
 });

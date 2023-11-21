@@ -2,9 +2,7 @@ import { SafeAreaView, Text, View, StyleSheet, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { LinearGradient } from 'expo-linear-gradient';
-import CredentialCard from '../../components/CredentialCard';
-import UserCard from '../../components/UserCard';
+import ConnectionCard from '../components/ConnectionCard';
 
 const Credentials = () => {
 
@@ -12,43 +10,43 @@ const Credentials = () => {
 
     const [data, setData] = useState<Array<Object>>([]); // TODO: replace with actual data from sigchain
 
-    const testData = [ // sample data, actual data will come from sigchain
+    const testConnections = [ // sample data, actual data will come from sigchain
         {
-            service: 'Twitter',
-            date: '01/03/2021',
+            displayName: 'Bobby Jones',
+            displayImagePath: '',
         },
         {
-            service: 'Github',
-            date: '02/01/2021',
+            displayName: 'Billy Thompson',
+            displayImagePath: '',
         },
         {
-            service: 'StackOverflow',
-            date: '05/05/2021',
+            displayName: 'John Smith',
+            displayImagePath: '',
         },
         {
-            service: "Facebook",
-            date: "02/03/2022",
+            displayName: "Alice Johnson",
+            displayImagePath: "",
         },
         {
-            service: "Instagram",
-            date: "03/05/2022",
+            displayName: "X Æ A-12",
+            displayImagePath: "",
         },
         {
-            service: "Reddit",
-            date: "04/06/2022",
+            displayName: "George Washington",
+            displayImagePath: "",
         },
         {
-            service: "LinkedIn",
-            date: "05/07/2022",
+            displayName: "Zachary Taylor",
+            displayImagePath: "",
         },
         {
-            service: "Discord",
-            date: "06/08/2022",
+            displayName: "Yoda",
+            displayImagePath: "",
         },
     ];
 
     useEffect(() => {
-        setData(testData);
+        setData(testConnections);
     },[]);
 
     //disable header/gestures
@@ -70,20 +68,20 @@ const Credentials = () => {
             <Text style = {styles.headerText}>Connections</Text>
 
             {/* Gradient container with either list of credentials or none found text */}
-            <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#1F1F1F"]} style = {styles.gradientContainer}>
+            <View style = {styles.connectionContainer}>
                 <FlatList
                     numColumns={1}
                     style = {styles.scrollContainer}
                     data = {data}
-                    renderItem = {({item}) => <CredentialCard credential={item} />}
+                    renderItem = {({item}) => <ConnectionCard connection={item} />}
                     keyExtractor = {(item, index) => index.toString()}
                     ListEmptyComponent = {() => <Text style = {styles.bodyText}>No Connections Found</Text>}
                 />
-            </LinearGradient>
+            </View>
 
             {/* Add Credential Button */}
             <TouchableOpacity style = {styles.addButton} onPress={handleAddCredential}>
-                <Text style = {styles.bodyText}>New Connection</Text>
+                <Text style = {styles.buttonText}>New Connection</Text>
             </TouchableOpacity>
         </SafeAreaView>
     );
@@ -94,17 +92,18 @@ export default Credentials;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#141414',
+        backgroundColor: '#303030',
         alignItems: 'center',
         justifyContent: 'center',
     },
-    gradientContainer: {
+    connectionContainer: {
         height: 650,
         width: 380,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 30,
         paddingHorizontal: 15,
+        backgroundColor: '#555555',
     },
     scrollContainer: {
         marginVertical: 10,
@@ -123,12 +122,16 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'white',
     },
+    buttonText: {
+        fontSize: 18,
+        color: 'black',
+    },
     addButton: {
-        backgroundColor: '#2F2F2F',
+        backgroundColor: 'white',
         marginTop: 10,
-        width: 180,
         borderRadius: 40,
-        height: 45,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },

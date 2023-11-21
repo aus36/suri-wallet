@@ -1,12 +1,11 @@
+//@ts-ignore
+import * as Storage from "../functions/storage.ts"
 import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import useAuth from '../hooks/useAuth';
-import { LinearGradient } from 'expo-linear-gradient';
-//@ts-ignore
-import * as Storage from "../functions/storage.ts"
 import CredentialCard from '../components/CredentialCard';
 
 const Profile = () => {
@@ -53,17 +52,16 @@ const Profile = () => {
         },
     ];
 
-    useEffect(() => {
-        setData(testData);
-    },[]);
-
-
     useLayoutEffect(() => { // disable header
         navigation.setOptions({
             headerShown: false,
             gestureEnabled: false,
         });
     }, [navigation]);
+
+    useEffect(() => {
+            setData(testData);
+        },[]);
 
     useEffect(() => { // useEffect to get sigchain from storage upon first screen load
         async () => {
@@ -92,14 +90,14 @@ const Profile = () => {
             </View>
 
             {/* Gradient container with either list of credentials or none found text */}
-            <LinearGradient start = {{x: 0, y: 0}} colors={["#4C4C4C", "#1F1F1F"]} style = {styles.gradientContainer}>
+            <View style = {styles.credentialContainer}>
             {(data.length > 0) ? (
                 <FlatList data = {testData} numColumns={1} style = {styles.scrollContainer} renderItem={ ({item}) => <CredentialCard credential={item}/>}/>
                 ) : (
                 <Text style = {styles.bodyText}>No Credentials Found</Text>
                 )
             }
-            </LinearGradient>
+            </View>
         </SafeAreaView>
     );
 }
@@ -109,15 +107,16 @@ export default Profile;
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#141414",
+      backgroundColor: "#303030",
       alignItems: 'center',
       justifyContent: 'center',
     },
-    gradientContainer: {
+    credentialContainer: {
         height: 550,
         width: 360,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#555555',
         borderRadius: 30,
         padding: 15,
         marginTop: 20,
@@ -146,7 +145,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     actionButton: {
-        backgroundColor: '#2F2F2F',
+        backgroundColor: '#555555',
         marginTop: 10,
         width: 160,
         borderRadius: 40,

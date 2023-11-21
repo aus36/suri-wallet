@@ -24,7 +24,7 @@ const Settings = () => {
 
     return (
         <SafeAreaView style = {styles.container}>
-            <Text style = {styles.headerText}>Settings Screen</Text>
+            <Text style = {styles.headerText}>Settings</Text>
             <TouchableOpacity style = {styles.logoutButton} onPress={handleLogout}>
                 <Text style = {styles.bodyText}>Logout</Text>
             </TouchableOpacity>
@@ -37,7 +37,7 @@ export default Settings;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#141414',
+        backgroundColor: '#303030',
         alignItems: 'center',
         justifyContent: 'center'
     },

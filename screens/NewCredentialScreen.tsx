@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../hooks/useAuth';
 import { useLayoutEffect } from 'react';
 
 const NewCredential = () => {

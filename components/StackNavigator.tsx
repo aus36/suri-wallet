@@ -5,11 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import Login from '../screens/LoginScreen';
 import Register from '../screens/RegisterScreen';
 import Settings from '../screens/SettingsScreen';
-import Credentials from '../screens/credentials/CredentialsScreen';
-import CredentialModification from '../screens/credentials/CredentialModificationScreen';
+import Credentials from '../screens/ConnectionsScreen';
 import * as Haptics from 'expo-haptics';
 import Profile from '../screens/ProfileScreen';
-import NewCredential from '../screens/credentials/NewCredentialScreen';
+import NewCredential from '../screens/NewCredentialScreen';
 import Users from '../screens/UsersScreen';
 import Dev from '../screens/DevScreen';
 import { FontAwesome } from '@expo/vector-icons';
@@ -31,7 +30,7 @@ function TabNavigator() { // contains all pages that have bottom tab navigator
   }
 
     return (
-        <Tabs.Navigator initialRouteName = "Profile" screenOptions={{tabBarStyle: {backgroundColor: "#141414"}}}>
+        <Tabs.Navigator initialRouteName = "Profile" screenOptions={{tabBarStyle: {backgroundColor: "#303030"}}}>
             <Tabs.Screen 
               name="Credentials"
               component={Credentials} 
@@ -69,7 +68,6 @@ export default function StackNavigator() {
         <Stack.Navigator initialRouteName='Login'>
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
-            <Stack.Screen name="CredentialModification" component={CredentialModification} />
             <Stack.Screen name="NewCredential" component={NewCredential} />
             <Stack.Screen name="Users" component={Users} />
             <Stack.Screen name="Dev" component={Dev} />

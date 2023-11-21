@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#212121',
+    backgroundColor: '#303030',
     marginVertical: 5,
   },
   headerText: {
