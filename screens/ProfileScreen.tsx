@@ -1,9 +1,8 @@
 //@ts-ignore
 import * as Storage from "../functions/storage.ts"
-import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet, FlatList, SafeAreaView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import useAuth from '../hooks/useAuth';
 import CredentialCard from '../components/CredentialCard';
@@ -70,26 +69,34 @@ const Profile = () => {
         }
     },[]);
 
+    function handleAddIdentity() {
+        // @ts-ignore
+        navigation.navigate('NewCredential');
+    }
+
     return (
         <SafeAreaView style = {styles.container}>
-            {/*Profile Logo*/}
-            <AntDesign name="user" size={36} color="white" style = {styles.profileLogo}/>
+            {/* Profile container */}
+            <View style = {styles.headerContainer}>
+                {/*Profile Logo*/}
+                <Image source={require('../assets/blankpfp.png')} style={styles.profileLogo}/>
 
-            {/*Header*/}
-            {/* @ts-ignore */}
-            <Text style = {styles.headerText}>{currentUser || "No display name"}</Text>
+                {/*Header*/}
+                {/* @ts-ignore */}
+                <Text style = {styles.headerText}>{currentUser || "No display name"}</Text>
 
-            {/*Buttons*/}
-            <View style = {styles.row}>
-                <TouchableOpacity style = {styles.actionButton} onPress={() => {}}>
-                    <Text style = {styles.bodyText}>Export Info</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style = {styles.actionButton}>
-                    <Text style = {styles.bodyText}>Update Info</Text>
-                </TouchableOpacity>
+                {/*Buttons*/}
+                <View style = {styles.row}>
+                    <TouchableOpacity style = {styles.actionButton} onPress={() => {handleAddIdentity()}}>
+                        <Text style = {styles.buttonText}>Add Identity</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style = {styles.actionButton}>
+                        <Text style = {styles.buttonText}>Update Info</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
 
-            {/* Gradient container with either list of credentials or none found text */}
+            {/* Credential Container */}
             <View style = {styles.credentialContainer}>
             {(data.length > 0) ? (
                 <FlatList data = {testData} numColumns={1} style = {styles.scrollContainer} renderItem={ ({item}) => <CredentialCard credential={item}/>}/>
@@ -111,31 +118,37 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    credentialContainer: {
-        height: 550,
-        width: 360,
+    headerContainer: {
+        height: "30%",
+        width: "100%",
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#555555',
-        borderRadius: 30,
-        padding: 15,
-        marginTop: 20,
+    },
+    credentialContainer: {
+        height: "70%",
+        width: "82%",
+        maxWidth: 350,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10,
     },
     scrollContainer: {
-        paddingVertical: 10,
         height: "100%",
         width: "100%",
         borderRadius: 20,
     },
     profileLogo: {
-        borderWidth: 1,
-        borderRadius: 35,
-        borderColor: 'white',
-        padding: 15,
-        marginBottom: 20,
+        borderRadius: 999,
+        height: 90,
+        width: 90,
+        marginBottom: 15,
     },
     bodyText: {
         color: 'white',
+        fontSize: 20,
+    },
+    buttonText: {
+        color: 'black',
         fontSize: 20,
     },
     headerText: {
@@ -145,7 +158,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     actionButton: {
-        backgroundColor: '#555555',
+        backgroundColor: 'white',
         marginTop: 10,
         width: 160,
         borderRadius: 40,

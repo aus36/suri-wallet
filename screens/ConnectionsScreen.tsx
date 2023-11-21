@@ -3,10 +3,13 @@ import { useNavigation } from '@react-navigation/native';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ConnectionCard from '../components/ConnectionCard';
+import useAuth from '../hooks/useAuth';
 
 const Credentials = () => {
 
     const navigation = useNavigation(); // enable navigation
+
+    const {currentUser} = useAuth();
 
     const [data, setData] = useState<Array<Object>>([]); // TODO: replace with actual data from sigchain
 
@@ -65,7 +68,15 @@ const Credentials = () => {
     return (
         <SafeAreaView style = {styles.container}>
             {/* Header */}
-            <Text style = {styles.headerText}>Connections</Text>
+            <Text style = {styles.headerText}>{currentUser || "Connections"}</Text>
+            <View style = {styles.row}>
+                <TouchableOpacity onPress={() => {}} style = {styles.headerButton}>
+                    <Text style = {styles.headerButtonText}>Followers</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {}} style = {styles.headerButton}>
+                    <Text style = {styles.headerButtonText}>Following</Text>
+                </TouchableOpacity>
+            </View>
 
             {/* Gradient container with either list of credentials or none found text */}
             <View style = {styles.connectionContainer}>
@@ -97,13 +108,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     connectionContainer: {
-        height: 650,
-        width: 380,
+        height: "80%",
+        maxHeight: 650,
+        width: "90%",
+        maxWidth: 380,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 30,
-        paddingHorizontal: 15,
-        backgroundColor: '#555555',
     },
     scrollContainer: {
         marginVertical: 10,
@@ -134,5 +145,23 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    headerButton: {
+        backgroundColor: 'white',
+        borderRadius: 40,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: 10,
+    },
+    headerButtonText: {
+        fontSize: 18,
+        color: 'black',
     },
 });

@@ -21,16 +21,19 @@ const ConnectionCard = (props:connectionProps) => {
   }
 
   return ( // @ts-ignore
-    <TouchableOpacity onPress={() => {Alert.alert("Unfollow "+props.connection.displayName+"?")}} style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.row}>
-        <View style={styles.imageContainer}>
+        <View style={styles.leftContainer}>
           <Image source={handleImage()} style = {styles.profileImage}/>
-        </View>
-        <View style={styles.textContainer}>
           <Text style = {styles.cardText}>{props.connection.displayName}</Text>
         </View>
+        <View style={styles.rightContainer}>
+          <TouchableOpacity onPress={() => {Alert.alert("Unfollow "+props.connection.displayName+"?")}} style = {styles.unfollowButton}>
+            <Text style = {styles.unfollowButtonText}>Unfollow</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -38,41 +41,54 @@ export default ConnectionCard;
 
 const styles = StyleSheet.create({
   container: {
-    height: 100,
+    height: 80,
     width: "100%",
     borderRadius: 20,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#333333',
+    backgroundColor: '#555555',
     marginVertical: 5,
+    paddingHorizontal: 10,
   },
   profileImage: {
-    height: 70,
-    width: 70,
+    height: 50,
+    width: 50,
     borderRadius: 999,
   },
-  imageContainer: {
-    height: "100%",
-    width: "35%",
-    alignItems: 'center',
-    justifyContent: 'center',
-
-  },
-  textContainer: {
+  leftContainer: {
     height: "100%",
     width: "60%",
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  rightContainer: {
+    height: "100%",
+    width: "40%",
     justifyContent: 'center',
-
+    alignItems: 'center',
   },
   cardText: {
     color: 'white',
-    fontSize: 26,
+    fontSize: 24,
     margin: 5,
+    paddingRight: 10,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  unfollowButton: {
+    backgroundColor: 'white',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  unfollowButtonText: {
+    color: 'black',
+    fontSize: 18,
   },
 });

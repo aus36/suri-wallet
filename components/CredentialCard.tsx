@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/core';
 
@@ -49,8 +49,12 @@ const CredentialCard = (props) => {
   
   const imageSource = getImagePath(props.credential.service); // fetch image path for current card
 
+  function handlePress() {
+    Alert.alert("Revoke "+props.credential.service+"?");
+  }
+
   return ( // @ts-ignore
-    <TouchableOpacity onPress={() => {navigation.navigate("CredentialModification", props.credential)}} style={styles.container}>
+    <TouchableOpacity onPress={() => {handlePress()}} style={styles.container}>
       <View style={styles.row}>
         {/* Image container */}
         <View style={styles.imageContainer}>
@@ -73,13 +77,13 @@ export default CredentialCard;
 
 const styles = StyleSheet.create({
   container: {
-    height: 100,
+    height: 90,
     width: "100%",
     borderRadius: 20,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#303030',
+    backgroundColor: '#555555',
     marginVertical: 5,
   },
   headerText: {
